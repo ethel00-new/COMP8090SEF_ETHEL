@@ -1,7 +1,6 @@
-
 # 🔐 Password Management System
 
-A secure, extensible, and user-friendly **password & credential management system** designed to simplify how users store, generate, manage, and track credentials.
+This System is a **password & credential management system** designed to simplify how users store, generate, manage, and track credentials.
 
 It combines a clean **Object-Oriented Programming (OOP)** architecture with **CRUD-based REST APIs**, solving common problems like password reuse, weak password creation, manual expiration tracking, and unorganized credential storage.
 
@@ -80,6 +79,9 @@ class PasswordRule:
         self._max_length = max_length
         self._require_special = require_special
         self._numbers_only = numbers_only
+
+    def get_max_length(self) -> int:
+    def set_max_length(self, value: int):
 ```
 
 ---
