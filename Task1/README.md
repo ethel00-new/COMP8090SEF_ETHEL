@@ -106,9 +106,12 @@ class PasswordService:
 ---
 
 ### Modular Programming
-
-- **Service & Models** separated.
-- Composition over inheritance for flexibility.
+Service and Main (It can call the controller, it is actually an MVC model.)
+Able to call other classes from different files
+```
+from models import PasswordRule, PasswordEntry, logger
+from services import PasswordService
+```
 
 ---
 
