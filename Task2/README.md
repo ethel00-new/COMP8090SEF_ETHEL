@@ -139,7 +139,7 @@ Reached destination → shortest path found.
 - Using a **min-heap priority queue**:
     - Each edge relaxation: (O(log V))
     - Total complexity:  
-        [ O((V + E) . log V) ]
+        [ O((V + E) * log V) ]
 - Where:
     - (V) = number of vertices (nodes)
     - (E) = number of edges
