@@ -115,6 +115,23 @@ Reached destination → shortest path found.
 - A → D → E = 2 + 4 = 6
 - A → B → E = 3 + 2 = **5** (shorter)
 
+**priority queue table** showing how Dijkstra’s algorithm processes the nodes step by step:
+
+|Step|Queue (Node, Distance)|Action Taken|Updates|
+|---|---|---|---|
+|Init|(A,0), (B,∞), (C,∞), (D,∞), (E,∞), (G,∞)|Start at A|Distance(A)=0|
+|1|(D,2), (B,3), (C,∞), (E,∞), (G,∞)|Expand A|B=3, D=2|
+|2|(B,3), (E,6), (G,6), (C,∞)|Expand D (smallest=2)|E=6, G=6|
+|3|(E,5), (G,6), (C,∞)|Expand B (next smallest=3)|E updated to 5 (better than 6)|
+|4|(G,6), (C,∞)|Expand E (distance=5)|Destination reached|
+
+
+**Key Insight**
+
+- The priority queue ensures nodes are always expanded in **order of smallest known distance**.
+- Even though **D** was closer initially (2 vs. 3), the algorithm still expands **B** afterward because it’s the next smallest.
+- That’s how it finds the shorter path **A → B → E = 5**, instead of stopping at **A → D → E = 6**.
+
 ---
 
 ## 📌 Time Complexity
