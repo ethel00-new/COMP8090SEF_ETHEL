@@ -2,29 +2,31 @@
 
 ## System Overview
 This project is a password and credential management system designed to simplify how users store, generate, manage, and track credentials securely.
+
 It combines a clean Object-Oriented Programming (OOP) architecture with a set of CRUD-based REST APIs, allowing structured password handling with strong maintainability and extensibility.
+
 The system solves several common problems: password reuse, weak password creation, manual expiration tracking, forgot password and unorganized credential file storage.
 
 ### Key Features:
-- Secure password & credential storage
+- **Secure password & credential storage**
 Store login passwords or credential files such as .pem or .cer to keep all service-related authentication materials in one place.
-- Support for uploading credential/key files
+- **Support for uploading credential/key files**
 Users can upload files tied to a password entry, allowing non-password authentication materials to be stored together.
-- Customizable strong password generator
+- **Customizable strong password generator**
 The system provides a flexible password generator supporting:
     - Custom length
     - Optional special characters
     - Numeric-only patterns
     - Optional alphabet-first requirement
     - Password expiration tracking
-- Password expiration tracking
+- **Password expiration tracking**
 Tracks expiry dates and highlights entries that have expired or may require renewal (e.g., near the 90‑day security rotation cycle).
-- Password strength checking
+- **Password strength checking**
 Checks for at least 10 characters and 3 out of 4 categories:
 uppercase, lowercase, digits, special characters.
-- Duplicate password detection
+- **Duplicate password detection**
 Warns if the same password is reused across different sites.
-- Full CRUD REST API
+- **Full CRUD REST API**
 Provides endpoints to:
     - Create password/credential entries
     - Read all saved credentials
