@@ -103,8 +103,6 @@ Neighbors of B:
 
 Reached destination → shortest path found.
 
----
-
 ## ✅ Result
 
 - Shortest Path: **A → B → E**
