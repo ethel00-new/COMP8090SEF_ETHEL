@@ -59,7 +59,7 @@ Dijkstra’s Algorithm is used to find the **shortest path** between two nodes i
 
 
 ## 📊 Example Walkthrough: Shortest Path from **A → E**
-
+![alt text](image.png)
 We want to find the shortest path from **A** to **E**.
 
 ### Step 1: Initialization
