@@ -35,26 +35,6 @@ GRAPH = {
 - **Edges**: Weighted connections between nodes (e.g., `A → B` has weight `3`)
 - **Weights**: Distances between buildings
 
-### Graph Visualization
-
-|Node|Neighbors (with distance)|
-|---|---|
-|A|B (3), D (2)|
-|B|A (3), C (4), E (2)|
-|C|B (4), F (6)|
-|D|A (2), E (4), G (4)|
-|E|B (2), D (4), F (3), H (7)|
-|F|C (6), E (3), I (5), J (5)|
-|G|D (4), H (3)|
-|H|E (7), G (3), I (2)|
-|I|F (5), H (2)|
-|J|F (5)|
-
-This structure is efficient because:
-
-- It stores only existing edges (no wasted space).
-- It allows quick traversal of neighbors.
-
 ---
 
 ## 📌 Dijkstra’s Algorithm
@@ -75,65 +55,79 @@ Dijkstra’s Algorithm is used to find the **shortest path** between two nodes i
     
     - Continue until the destination node is reached or all nodes are processed.
 
-### Example Walkthrough
+---
 
-Suppose we want the shortest path from **A → F**:
 
-1. Start at **A** (distance = 0).
-2. Neighbors:
-    - B = 3
-    - D = 2
-3. Next smallest: **D (2)**.
-    - From D → E = 6, G = 6
-4. Next smallest: **B (3)**.
-    - From B → C = 7, E = 5
-5. Next smallest: **E (5)**.
-    - From E → F = 8, H = 12
-6. Next smallest: **F (8)** → Destination reached.
+## 📊 Example Walkthrough: Shortest Path from **A → E**
 
-**Shortest Path**: `A → B → E → F`  
-**Distance**: `8`
+We want to find the shortest path from **A** to **E**.
+
+### Step 1: Initialization
+
+- Distance(A) = 0
+- Distance(B, C, D, E, …) = ∞
+
+### Step 2: First Expansion (A)
+
+Neighbors of A:
+
+- B = 0 + 3 = 3
+- D = 0 + 2 = 2
+
+|Node|A|B|D|E|
+|---|---|---|---|---|
+|Dist|0|3|2|∞|
+
+### Step 3: Expand D (smallest distance = 2)
+
+Neighbors of D:
+
+- E = 2 + 4 = 6
+- G = 2 + 4 = 6
+
+|Node|A|B|D|E|G|
+|---|---|---|---|---|---|
+|Dist|0|3|2|6|6|
+
+### Step 4: Expand B (distance = 3)
+
+Neighbors of B:
+
+- E = 3 + 2 = 5 (better than 6 → update)
+
+|Node|A|B|D|E|G|
+|---|---|---|---|---|---|
+|Dist|0|3|2|**5**|6|
+
+### Step 5: Expand E (distance = 5)
+
+Reached destination → shortest path found.
+
+---
+
+## ✅ Result
+
+- Shortest Path: **A → B → E**
+- Total Distance: **5**
+
+### Why not A → D → E?
+
+- A → D → E = 2 + 4 = 6
+- A → B → E = 3 + 2 = **5** (shorter)
 
 ---
 
 ## 📌 Time Complexity
 
-- **Using Min-Heap (Priority Queue)**:
-    - Each edge is relaxed once → (O(E \log V))
-    - Each node is extracted from the heap → (O(V \log V))
+- Using a **min-heap priority queue**:
+    - Each edge relaxation: (O(log V))
+    - Total complexity:  
+        [ O((V + E) . log V) ]
+- Where:
+    - (V) = number of vertices (nodes)
+    - (E) = number of edges
 
-Overall complexity:
-
-[ O((V + E) \cdot \log V) ]
-
-Where:
-
-- (V) = number of vertices (nodes)
-- (E) = number of edges
-
-### Space Complexity
-
-- Distance dictionary: (O(V))
-- Previous node dictionary: (O(V))
-- Priority queue: up to (O(V))
-
----
-
-## 📌 Graph Illustration
-
-Here’s a simple sketch of the graph structure:
-
-```
-   A --3-- B --4-- C
-   |       |       |
-   2       2       6
-   |       |       |
-   D --4-- E --3-- F --5-- J
-   |       |       |
-   4       7       5
-   |       |       |
-   G --3-- H --2-- I
-```
+For dense graphs, this is efficient compared to a simple array-based implementation.
 
 ---
 
