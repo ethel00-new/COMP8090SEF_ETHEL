@@ -8,25 +8,39 @@ It combines a clean Object-Oriented Programming (OOP) architecture with a set of
 The system solves several common problems: password reuse, weak password creation, manual expiration tracking, forgot password and unorganized credential file storage.
 
 ### Key Features:
+
 - **Secure password & credential storage**
+
 Store login passwords or credential files such as .pem or .cer to keep all service-related authentication materials in one place.
+
 - **Support for uploading credential/key files**
+
 Users can upload files tied to a password entry, allowing non-password authentication materials to be stored together.
+
 - **Customizable strong password generator**
+
 The system provides a flexible password generator supporting:
     - Custom length
     - Optional special characters
     - Numeric-only patterns
     - Optional alphabet-first requirement
     - Password expiration tracking
+
 - **Password expiration tracking**
+
 Tracks expiry dates and highlights entries that have expired or may require renewal (e.g., near the 90‑day security rotation cycle).
+
 - **Password strength checking**
+
 Checks for at least 10 characters and 3 out of 4 categories:
 uppercase, lowercase, digits, special characters.
+
 - **Duplicate password detection**
+
 Warns if the same password is reused across different sites.
+
 - **Full CRUD REST API**
+
 Provides endpoints to:
     - Create password/credential entries
     - Read all saved credentials
@@ -38,7 +52,9 @@ Provides endpoints to:
 
 ### Abstraction / ADT
 - Abstract Base Class: BaseEntry defines the abstract interface for entries with to_dict() and from_dict() to concrete models implement these methods. 
+
 This hides serialization details behind a stable abstraction.
+
 ```python
 class BaseEntry(ABC):
     @abstractmethod
@@ -47,7 +63,9 @@ class BaseEntry(ABC):
     @abstractmethod
     def from_dict(cls, data: dict): ...
 ```
+
 - Generator Strategy Interface: PasswordGenerator is an interface with a single generate() method; StandardPasswordGenerator implements it.
+
 Consumers depend on the abstraction, not the implementation.
 ```python
 class PasswordGenerator:
@@ -57,6 +75,7 @@ class PasswordGenerator:
 
 ### Encapsulation
 - Private State & Getters/Setters: PasswordRule and PasswordEntry store data in “private” attributes (e.g., _max_length, _site) and expose accessors/mutators.
+
 This allows validation/logging and keeps invariants centralized.
 ```python
 class PasswordRule:
@@ -67,13 +86,16 @@ class PasswordRule:
     def get_max_length(self) -> int: ...
     def set_max_length(self, value: int): ...
 ```
+
 - Change Auditing via __setattr__: PasswordEntry overrides __setattr__ to log attribute changes after initialization, encapsulating audit concerns within the entity.
+
 ```python
 def __setattr__(self, name: str, value) -> None:
 ```
 
 ### Inheritance
 - PasswordEntry inherits from BaseEntry and implements its abstract methods, providing concrete serialization (to_dict/from_dict). This demonstrates classical inheritance for shared contracts. 
+
 - StandardPasswordGenerator inherits from PasswordGenerator, enabling different concrete generators under a common type.
 
 ### Polymorphism
