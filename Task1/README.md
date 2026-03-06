@@ -4,6 +4,8 @@ Password Management System is a **password & credential management system** desi
 
 It combines a clean **Object-Oriented Programming (OOP)** architecture with **CRUD-based REST APIs**, solving common problems like password reuse, weak password creation, manual expiration tracking, and unorganized credential storage.
 
+## 📹 Introduction Video
+[video link later]
 ---
 
 ## ✨ Key Features

@@ -2,6 +2,8 @@
 
 **Warehouse Picking Route Planner** that demonstrates how to compute the shortest path between two buildings using **Dijkstra’s Algorithm** on a **graph data structure**. It also visualizes the graph layout on a canvas with predefined coordinates.
 
+## 📹 Introduction Video
+[video link later]
 ---
 
 ## 🚀 Features
