@@ -15,15 +15,15 @@
 
 ---
 
-# Graph Data Structure & Dijkstra’s Algorithm
+## Graph Data Structure & Dijkstra’s Algorithm
 
-## 📌 Graph Data Structure
+### 📌 Graph Data Structure
 
 In this project, the **graph** is represented using an **adjacency list**.  
 Each node (building) is a key in a dictionary, and its value is a list of tuples representing **neighbors** and the **distance (weight)** to them. The graph is **undirected**, so connections work both ways between buildings.
 
 
-### Example Representation
+#### Example Representation
 
 ```python
 GRAPH = {
@@ -40,11 +40,11 @@ GRAPH = {
 
 ---
 
-## 📌 Dijkstra’s Algorithm
+### 📌 Dijkstra’s Algorithm
 
 Dijkstra’s Algorithm is used to find the **shortest path** between two nodes in a weighted graph (with non-negative weights).
 
-### Steps of the Algorithm
+#### Steps of the Algorithm
 
 1. **Initialization**:
     
@@ -61,16 +61,16 @@ Dijkstra’s Algorithm is used to find the **shortest path** between two nodes i
 ---
 
 
-## 📊 Example Walkthrough: Shortest Path from **A → E**
+### 📊 Example Walkthrough: Shortest Path from **A → E**
 ![alt text](image.png)
 We want to find the shortest path from **A** to **E**.
 
-### Step 1: Initialization
+#### Step 1: Initialization
 
 - Distance(A) = 0
 - Distance(B, C, D, E, …) = ∞
 
-### Step 2: First Expansion (A)
+#### Step 2: First Expansion (A)
 
 Neighbors of A:
 
@@ -81,7 +81,7 @@ Neighbors of A:
 |---|---|---|---|---|
 |Dist|0|3|2|∞|
 
-### Step 3: Expand D (smallest distance = 2)
+#### Step 3: Expand D (smallest distance = 2)
 
 Neighbors of D:
 
@@ -92,7 +92,7 @@ Neighbors of D:
 |---|---|---|---|---|---|
 |Dist|0|3|2|6|6|
 
-### Step 4: Expand B (distance = 3)
+#### Step 4: Expand B (distance = 3)
 
 Neighbors of B:
 
@@ -102,16 +102,16 @@ Neighbors of B:
 |---|---|---|---|---|---|
 |Dist|0|3|2|**5**|6|
 
-### Step 5: Expand E (distance = 5)
+#### Step 5: Expand E (distance = 5)
 
 Reached destination → shortest path found.
 
-## ✅ Result
+### ✅ Result
 
 - Shortest Path: **A → B → E**
 - Total Distance: **5**
 
-### Why not A → D → E?
+#### Why not A → D → E?
 
 - A → D → E = 2 + 4 = 6
 - A → B → E = 3 + 2 = **5** (shorter)
@@ -137,7 +137,7 @@ Reached destination → shortest path found.
 
 ---
 
-## 📌 Time Complexity
+### 📌 Time Complexity
 
 - Using a **min-heap priority queue**:
     - Each edge relaxation: (O(log V))
@@ -151,7 +151,7 @@ For dense graphs, this is efficient compared to a simple array-based implementat
 
 ---
 
-## 🖥️ How to Run
+### 🖥️ How to Run
 ```bash
 cd Task2
 pip install -r requirements.txt
