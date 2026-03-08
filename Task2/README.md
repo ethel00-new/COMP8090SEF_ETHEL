@@ -20,7 +20,8 @@
 ## 📌 Graph Data Structure
 
 In this project, the **graph** is represented using an **adjacency list**.  
-Each node (building) is a key in a dictionary, and its value is a list of tuples representing **neighbors** and the **distance (weight)** to them.
+Each node (building) is a key in a dictionary, and its value is a list of tuples representing **neighbors** and the **distance (weight)** to them. The graph is **undirected**, so connections work both ways between buildings.
+
 
 ### Example Representation
 
