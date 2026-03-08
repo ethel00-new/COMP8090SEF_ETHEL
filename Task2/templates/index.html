@@ -375,6 +375,7 @@
     </div>
 </main>
 
+<!-- javascript -->
 <script>
     const positions = {{ positions | tojson }};
     const graph = {{ graph | tojson }};
@@ -470,6 +471,7 @@
 
         document.getElementById("status-text").textContent = "Computing route…";
 
+        // run dijkstra to find the shortest-path
         fetch("/shortest-path", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -482,7 +484,7 @@
                     document.getElementById("status-text").textContent = "Error";
                     return;
                 }
-
+                // update UI to show the result
                 const distanceSpan = document.getElementById("distance");
                 const stopCountSpan = document.getElementById("stop-count");
                 const stepsContainer = document.getElementById("path-steps");
