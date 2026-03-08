@@ -11,6 +11,8 @@ import string
 app = Flask(__name__, template_folder='templates', static_folder='.', static_url_path='')
 service = PasswordService(storage_file='passwords.json')
 
+# Call API call PasswordEntry , PasswordRule , PasswordService 
+# backend and frontend communicate
 @app.route('/')
 def index():
     return render_template('index.html')

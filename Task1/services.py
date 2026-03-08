@@ -15,16 +15,19 @@ class PasswordGenerator:
 
 class StandardPasswordGenerator(PasswordGenerator):
     def generate(self, rule: PasswordRule) -> str:
+        # at least 5 character
         length = max(5, rule.get_max_length())
         if rule.get_numbers_only():
             chars = string.digits
             min_digits = length
         else:
+            # special char
             chars = string.ascii_letters + string.digits
             if rule.get_require_special():
                 chars += ALLOWED_SPECIAL
             min_digits = 3
 
+        # random gen
         digits_part = ''.join(random.choice(string.digits) for _ in range(min_digits))
         remaining_length = length - min_digits
         if remaining_length > 0:
@@ -37,12 +40,17 @@ class StandardPasswordGenerator(PasswordGenerator):
 
 
 class PasswordService:
+    # get exist data from passwords.json
     def __init__(self, storage_file='passwords.json', generator: PasswordGenerator = None):
         self._storage_file = storage_file
         self._passwords = self._load_passwords()
+        # password but gen or manual
         self._generator = generator or StandardPasswordGenerator()
 
     def _load_passwords(self):
+        """
+        load password from json
+        """
         try:
             with open(self._storage_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
@@ -57,6 +65,9 @@ class PasswordService:
             return []
 
     def _save_passwords(self):
+        """
+        load password to json
+        """
         try:
             with open(self._storage_file, 'w', encoding='utf-8') as f:
                 json.dump(
@@ -69,6 +80,9 @@ class PasswordService:
             logger.error(f"Error saving passwords: {e}")
 
     def add_password(self, entry: PasswordEntry, rule: PasswordRule):
+        """
+        get_site , get_password from model.py PasswordEntry
+        """
         if not entry.get_site() or not entry.get_username():
             raise ValueError("Site and username are required.")
         if not entry.get_password() and not entry.get_file_path():
@@ -78,6 +92,9 @@ class PasswordService:
         self._save_passwords()
 
     def update_password(self, index: int, entry: PasswordEntry, rule: PasswordRule):
+        """
+        get_site , get_password from model.py PasswordEntry
+        """
         if index < 0 or index >= len(self._passwords):
             raise IndexError("Invalid password entry index")
         if not entry.get_site() or not entry.get_username():
@@ -89,6 +106,9 @@ class PasswordService:
         self._save_passwords()
 
     def delete_password(self, index: int):
+        """
+        get_site to remove from model.py PasswordEntry
+        """
         if index < 0 or index >= len(self._passwords):
             raise IndexError("Invalid password entry index")
         entry = self._passwords[index]
@@ -106,6 +126,9 @@ class PasswordService:
         return self._generator.generate(rule)
 
     def upload_file(self, file_storage) -> str | None:
+        """
+        upload file to files folder
+        """
         if not file_storage or not file_storage.filename:
             return None
         filename = file_storage.filename.replace('/', '_').replace('\\', '_')
@@ -120,6 +143,9 @@ class PasswordService:
         return dest_path
 
     def is_strong_password(self, password: str) -> bool:
+        """
+        check is strong 
+        """
         if not password or len(password) < 10:
             return False
         has_upper = any(c.isupper() for c in password)
@@ -130,6 +156,9 @@ class PasswordService:
         return len(password) >= 10 and category_count >= 3
 
     def is_repeated_password(self, password: str, exclude_index: int = -1) -> bool:
+        """
+        check is repeat
+        """
         if not password:
             return False
         for i, entry in enumerate(self._passwords):

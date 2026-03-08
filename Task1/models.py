@@ -2,6 +2,7 @@ from datetime import datetime
 from abc import ABC, abstractmethod
 import logging
 
+# add log in password_changes.log
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s | %(levelname)-7s | %(message)s',
@@ -13,6 +14,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger("PasswordManager")
 
+# set password rule
 class PasswordRule:
     def __init__(self, max_length: int, require_special: bool, numbers_only: bool):
         self._max_length = max_length
@@ -38,6 +40,7 @@ class PasswordRule:
         self._numbers_only = value
 
 
+# common function
 class BaseEntry(ABC):
     @abstractmethod
     def to_dict(self) -> dict:
@@ -136,6 +139,9 @@ class PasswordEntry(BaseEntry):
         self._file_path = value
 
     def to_dict(self) -> dict:
+        """
+        format data
+        """
         return {
             'site': self._site,
             'username': self._username,
@@ -146,6 +152,9 @@ class PasswordEntry(BaseEntry):
 
     @classmethod
     def from_dict(cls, data: dict):
+        """
+        format data
+        """
         expiry = datetime.strptime(data['expiry_date'], "%Y-%m-%d")
         return cls(
             site=data['site'],

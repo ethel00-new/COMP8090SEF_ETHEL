@@ -9,12 +9,14 @@ let editIndex = null;
         .replace(/'/g, "&#039;");
     }
 
+    // load password from backend
     async function loadPasswords() {
       const res = await fetch('/api/passwords');
       const data = await res.json();
       const tbody = document.getElementById('table-body');
       tbody.innerHTML = '';
 
+      // get all data then show the table in html
       data.forEach(item => {
         const tr = document.createElement('tr');
         if (item.strong) tr.classList.add('strong');
@@ -77,6 +79,7 @@ let editIndex = null;
       });
     }
 
+    // add copy function
     function copyToClipboard(text) {
       navigator.clipboard.writeText(text)
       .catch(() => {
@@ -84,6 +87,7 @@ let editIndex = null;
       });
     }
 
+    // send from data to backend and generate a new password
     async function generatePassword() {
       const maxLen = document.getElementById('max_length').value;
       const special = document.getElementById('special').checked;
@@ -109,6 +113,7 @@ let editIndex = null;
       }
     }
 
+    // find the data show it on fields
     function editEntry(index) {
       fetch('/api/passwords')
         .then(r => r.json())
@@ -130,12 +135,14 @@ let editIndex = null;
         });
     }
 
+    // just call api to delete 
     async function deleteEntry(index) {
       if (!confirm('Delete this entry?')) return;
       await fetch(`/api/password/${index}`, { method: 'DELETE' });
       loadPasswords();
     }
 
+    //clean the fields
     function resetForm() {
       document.getElementById('password-form').reset();
       document.getElementById('edit-index').value = '';
@@ -168,6 +175,7 @@ let editIndex = null;
       e.preventDefault();
       const formData = new FormData(e.target);
 
+      // call api to update or save
       try {
         const res = await fetch('/api/password', {
           method: 'POST',
