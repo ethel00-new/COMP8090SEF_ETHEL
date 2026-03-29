@@ -45,10 +45,32 @@ https://youtu.be/996RB4VpN2s
 
 ## 🧩 OOP Design
 
+### Class & Object
+A **class** is the blueprint that defines attributes and methods. An **object** is a concrete instance created from that class. Every object has its own methods that define its behavior.
+#### class
+
+```python
+class PasswordRule:
+class PasswordEntry(BaseEntry):
+class PasswordGenerator:
+class StandardPasswordGenerator(PasswordGenerator):
+class PasswordService:
+```
+#### Object
+
+```python
+# Method calls on objects
+entries = service.get_all_passwords()
+pw = service.generate_password(rule)
+service.add_password(entry, rule)
+expired = service.is_expired(e)
+strong = service.is_strong_password(pw)
+```
+
 ### Abstraction / ADT
 
 - **BaseEntry (Abstract Class)**  
-    Defines serialization interface (`to_dict`, `from_dict`).
+BaseEntry is an Abstract Base Class that defines the serialization interface (ADT) `to_dict`, `from_dict`.
 
 ```python
 class BaseEntry(ABC):
@@ -68,8 +90,6 @@ class PasswordGenerator:
         raise NotImplementedError
 ```
 
----
-
 ### Encapsulation
 
 - Private attributes with getters/setters for validation.
@@ -86,14 +106,10 @@ class PasswordRule:
     def set_max_length(self, value: int):
 ```
 
----
-
 ### Inheritance
 
 - `PasswordEntry` inherits from `BaseEntry`.
 - `StandardPasswordGenerator` inherits from `PasswordGenerator`.
-
----
 
 ### Polymorphism
 
@@ -105,27 +121,21 @@ class PasswordService:
         self._generator = generator or StandardPasswordGenerator()
 ```
 
----
-
 ### Modular Programming
 Service and Main (It can call the controller, it is actually an MVC model.)
 Able to call other classes from different files
-```
+```python
 from models import PasswordRule, PasswordEntry, logger
 from services import PasswordService
 ```
 
----
-
-## 🏗️ Key Classes
-
-|Class|Responsibility|
-|---|---|
-|**PasswordRule**|Encapsulates generation constraints (length, special chars, numeric-only).|
-|**PasswordEntry**|Represents a password record (site, username, password, expiry, file). Implements serialization & change logging.|
-|**PasswordGenerator / StandardPasswordGenerator**|Defines generator interface & default implementation. Easily swappable for new policies.|
-|**PasswordService**|Coordinates CRUD operations, validation, persistence, and password utilities.|
-
+### Magic Methods
+Python magic methods are special methods with double underscores that customize object behavior.
+```python
+    def __repr__(self) -> str:
+    def __str__(self) -> str:
+    def __setattr__(self, name: str, value) -> None:
+```
 ---
 
 ## 🚀 How to Run
