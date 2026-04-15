@@ -157,6 +157,7 @@ For dense graphs, this is efficient compared to a simple array-based implementat
 cd Task2
 pip install -r requirements.txt
 python main.py
+python more_detail.py
 ```
 
 Access the app at:  
