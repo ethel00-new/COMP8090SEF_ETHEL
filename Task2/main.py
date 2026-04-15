@@ -36,34 +36,34 @@ POSITIONS = {
 # Dijkstra implementation 
 def dijkstra(graph, start, end):
     # Priority queue of (distance, node)
-    pq = [(0, start)]
-    distances = {node: float("inf") for node in graph}
-    previous = {node: None for node in graph}
+    pq = [(0, start)] # step 1 : init 0
+    distances = {node: float("inf") for node in graph} # Step 2 : explore node and get float , other inf
+    previous = {node: None for node in graph} # step 3 : mark previous , for draw a graph
     distances[start] = 0
 
-    while pq:
-        dist, node = heapq.heappop(pq)
-        if dist > distances[node]:
+    while pq: # step 4 : if list still have data , keep going
+        dist, node = heapq.heappop(pq) # get the shorter distance 1st
+        if dist > distances[node]: # not better skip
             continue
-        if node == end:
+        if node == end: # done all
             break
-        for neighbor, weight in graph[node]:
-            new_dist = dist + weight
-            if new_dist < distances[neighbor]:
-                distances[neighbor] = new_dist
-                previous[neighbor] = node
-                heapq.heappush(pq, (new_dist, neighbor))
+        for neighbor, weight in graph[node]: # step 5 : have neighbor ?
+            new_dist = dist + weight # add dist
+            if new_dist < distances[neighbor]: # shorter record replace it 
+                distances[neighbor] = new_dist  # update shorter
+                previous[neighbor] = node # remember prev node
+                heapq.heappush(pq, (new_dist, neighbor)) # new finding on list
 
-    # Reconstruct path from end back to start
+    # Step 6 : until end still inf
     if distances[end] == float("inf"):
         return float("inf"), []
-
+    # step 7 : go back and find the shorter path
     path = []
     cur = end
     while cur is not None:
-        path.append(cur)
-        cur = previous[cur]
-    path.reverse()
+        path.append(cur) # save path
+        cur = previous[cur] # go back 
+    path.reverse() # just reverse
     return distances[end], path
 
 
