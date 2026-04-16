@@ -25,7 +25,9 @@ Each node (building) is a key in a dictionary, and its value is a list of tuples
 
 #### Example Representation
 **adjacency list**
+
 Undirected Graph (bidirectional edges).
+
 Each edge is bidirectional, meaning if A connects to B, then B also connects back to A with the same weight. The adjacency list stores both directions explicitly.
 ```python
 GRAPH = {
@@ -36,6 +38,7 @@ GRAPH = {
 }
 ```
 Directed Graph.
+
 Each edge has a direction, so if A connects to B, it does not imply that B connects back to A. The adjacency list only records the given direction of each edge.
 ```python
 GRAPH = {
