@@ -25,9 +25,7 @@ Each node (building) is a key in a dictionary, and its value is a list of tuples
 
 #### Example Representation
 **adjacency list**
-
 Undirected Graph (bidirectional edges).
-
 Each edge is bidirectional, meaning if A connects to B, then B also connects back to A with the same weight. The adjacency list stores both directions explicitly.
 ```python
 GRAPH = {
@@ -38,7 +36,6 @@ GRAPH = {
 }
 ```
 Directed Graph.
-
 Each edge has a direction, so if A connects to B, it does not imply that B connects back to A. The adjacency list only records the given direction of each edge.
 ```python
 GRAPH = {
@@ -70,20 +67,16 @@ matrix_direct_weight = [
 | **Best use case** | Sparse graphs | Dense graphs |
 
 #### Graph Images
-isweight_direct_graph
-
+**isweight_direct_graph**
 ![alt text](isweight_direct_graph.png)
 
-isweight_undirecte_graph
-
+**isweight_undirecte_graph**
 ![alt text](isweight_undirecte_graph.png)
 
-unweight_direct_graph
-
+**unweight_direct_graph**
 ![alt text](unweight_direct_graph.png)
 
-unweight_undirecte_graph
-
+**unweight_undirecte_graph**
 ![alt text](unweight_undirecte_graph.png)
 
 
@@ -208,8 +201,15 @@ For dense graphs, this is efficient compared to a simple array-based implementat
 cd Task2
 pip install -r requirements.txt
 python main.py
-python more_detail.py
 ```
 
 Access the app at:  
 👉 http://127.0.0.1:5000
+
+
+If you want to run a more detailed which not encounter real problems.
+```bash
+cd Task2
+pip install -r requirements.txt
+python more_detail.py
+```
