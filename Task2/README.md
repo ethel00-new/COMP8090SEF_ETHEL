@@ -126,7 +126,8 @@ Reached destination → shortest path found.
 |2|(B,3), (E,6), (G,6), (C,∞)|Expand D (smallest=2)|E=6, G=6|
 |3|(E,5), (G,6), (C,∞)|Expand B (next smallest=3)|E updated to 5 (better than 6)|
 |4|(G,6), (C,∞)|Expand E (distance=5)|Destination reached|
-
+Full step 
+![alt text](full_step.png)
 
 **Key Insight**
 
