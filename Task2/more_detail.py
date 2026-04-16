@@ -165,41 +165,38 @@ def matrix_to_adjlist(matrix, nodes, is_weight):
     return adjlist
 
 # Draw graph from adjacency matrix
-def draw_matrix_graph(matrix, nodes, is_direct, is_weight, filename):
+def draw_matrix_graph(matrix, nodes, filename):
     """
-    Draw graph directly from adjacency matrix.
+    Draw a directed weighted graph from an adjacency matrix.
     """
-    # Choose graph type
-    G = nx.DiGraph() if is_direct else nx.Graph()
+    # Create a directed graph
+    G = nx.DiGraph()
 
-    # Add edges
-    n = len(nodes)
-    for i in range(n):
-        for j in range(n):
-            if matrix[i][j] != 0:
-                w = matrix[i][j] if is_weight else 1
-                G.add_edge(nodes[i], nodes[j], weight=w)
+    # Add nodes
+    for node in nodes:
+        G.add_node(node)
 
-    # Layout
-    pos = nx.spring_layout(G, k=0.8)
+    # Add edges with weights
+    for i in range(len(nodes)):
+        for j in range(len(nodes)):
+            weight = matrix[i][j]
+            if weight != 0:  # Only add edges with non-zero weight
+                G.add_edge(nodes[i], nodes[j], weight=weight)
 
-    plt.figure(figsize=(8,6))
-    nx.draw_networkx_nodes(G, pos, node_color="lightblue", node_size=800, edgecolors="black")
-    if is_direct:
-        nx.draw_networkx_edges(G, pos, edge_color="gray", arrows=True, arrowsize=20,width=2)
-    else:
-        nx.draw_networkx_edges(G, pos, edge_color="gray", width=2)
-    nx.draw_networkx_labels(G, pos, font_size=12, font_weight="bold")
+    # Layout for visualization
+    pos = nx.spring_layout(G, seed=42)  # consistent layout
 
-    if is_weight:
-        edge_labels = nx.get_edge_attributes(G, "weight")
-        nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=10)
+    # Draw nodes and edges
+    nx.draw(G, pos, with_labels=True, node_color="skyblue", node_size=2000, font_size=12, arrows=True)
 
-    plt.title("Adjacency Matrix Graph", fontsize=14)
-    plt.axis("off")
-    plt.tight_layout()
-    plt.savefig(filename, format="png", dpi=300)
+    # Draw edge labels (weights)
+    edge_labels = nx.get_edge_attributes(G, "weight")
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color="red")
+
+    # Save to file
+    plt.savefig(filename)
     plt.close()
+
 
 
 #  MAIN PROGRAM 
@@ -246,8 +243,7 @@ if __name__ == "__main__":
     adjlist_m = matrix_to_adjlist(matrix_direct_weight, nodes, is_weight=True)
     print("Convert matrix to adjacency list",adjlist_m )
     # Draw matrix graph
-    draw_matrix_graph(matrix_direct_weight, nodes, is_direct=True, is_weight=True, filename="matrix_direct_weight.png")
-    draw_matrix_graph(matrix_direct_weight, nodes, is_direct=False, is_weight=True, filename="matrix_undirect_weight.png")
+    draw_matrix_graph(matrix_direct_weight, nodes, filename="matrix.png")
 
     draw_graph(a_graph, is_weight=True, is_direct=True, filename="isweight_direct_graph.png")
     draw_graph(a_graph, is_weight=False, is_direct=True, filename="unweight_direct_graph.png")

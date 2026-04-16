@@ -23,9 +23,10 @@ https://youtu.be/kTo-SNbl0PY
 In this project, the **graph** is represented using an **adjacency list**.  
 Each node (building) is a key in a dictionary, and its value is a list of tuples representing **neighbors** and the **distance (weight)** to them. The graph is **undirected**, so connections work both ways between buildings.
 
-
 #### Example Representation
-
+**adjacency list**
+Undirected Graph (bidirectional edges).
+Each edge is bidirectional, meaning if A connects to B, then B also connects back to A with the same weight. The adjacency list stores both directions explicitly.
 ```python
 GRAPH = {
     "A": [("B", 3), ("D", 2)],
@@ -34,10 +35,54 @@ GRAPH = {
     ...
 }
 ```
+Directed Graph.
+Each edge has a direction, so if A connects to B, it does not imply that B connects back to A. The adjacency list only records the given direction of each edge.
+```python
+GRAPH = {
+    "A": [("B", 3), ("D", 2)],
+    "B": [("A", 3), ("C", 4), ("E", 2)],
+    ...
+}
+```
+
+**adjacency matrix**
+```python
+matrix_direct_weight = [
+    [0, 4, 2, 0],  # A → B=4, A→C=2
+    [0, 0, 0, 10], # B → D=10
+    [0, 0, 0, 5],  # C → D=5
+    [0, 0, 0, 0]   # D
+]
+```
 
 - **Nodes**: Buildings labeled `A, B, C, ... J`
 - **Edges**: Weighted connections between nodes (e.g., `A → B` has weight `3`)
 - **Weights**: Distances between buildings
+
+| Feature | Adjacency List | Adjacency Matrix |
+| --- | --- | --- |
+| **Space efficiency** | Uses less space for sparse graphs | Always $n^2$ space |
+| **Edge lookup** | Slower (need to search list) | Fast (direct index lookup) |
+| **Iteration over edges** | Easy (neighbors stored directly) | Must scan entire row |
+| **Best use case** | Sparse graphs | Dense graphs |
+
+#### Graph Images
+isweight_direct_graph
+
+![alt text](isweight_direct_graph.png)
+
+isweight_undirecte_graph
+
+![alt text](isweight_undirecte_graph.png)
+
+unweight_direct_graph
+
+![alt text](unweight_direct_graph.png)
+
+unweight_undirecte_graph
+
+![alt text](unweight_undirecte_graph.png)
+
 
 ---
 
