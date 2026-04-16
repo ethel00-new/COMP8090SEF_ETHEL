@@ -128,6 +128,7 @@ Reached destination → shortest path found.
 |4|(G,6), (C,∞)|Expand E (distance=5)|Destination reached|
 
 Full step 
+
 ![alt text](full_step.png)
 
 **Key Insight**
